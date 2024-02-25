@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="top-left">Coffee Order System</a></li>
+            <li><a href="search.html" class="top-right">Order Status</a></li>
+        </ul>
+    </nav>
+    <div class="order-details">
+        <div class="order-info">
+            <p>Order placed:</p>
+            <p>Order id: <span id="order-id"></span></p>
+            <p> <span id="order-name"></span></p>
+            <p>Total: <span id="total-price"></span></p>
+        </div>
+    </div>
+</body>
+<script>
+    var order = JSON.parse(localStorage.getItem('order'));
+    document.getElementById('order-id').innerText += order.id;
+    document.getElementById('order-name').innerText += order.name;
+    document.getElementById('total-price').innerText += order.price;
+    localStorage.removeItem('order');
+    localStorage.removeItem('beverage');
+    localStorage.removeItem('condiments');
+</script>
+
+</html>
