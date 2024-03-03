@@ -13,7 +13,7 @@
   <nav>
     <ul>
       <li><a href="index.html" class="top-left">Coffee Order System</a></li>
-      <li><a href="search.html" class="top-right">Order Status</a></li>
+      <li><a href="confirmation.html" class="top-right">Order Status</a></li>
     </ul>
   </nav>
 
@@ -34,7 +34,7 @@
       <button id="3" class="sideButton" onclick="removeCondiment(3)">Condiment 3</button>
       <button id="4" class="sideButton" onclick="removeCondiment(4)">Condiment 4</button>
       <br /><br /><br />
-      <button class="sideButton" onclick="saveSelectedCondiments(); saveOrder(); window.location.href='confirmation.html'">Confirm
+      <button class="sideButton" onclick="saveSelectedCondiments(); saveOrder();">Confirm
         Order</button>
     </div>
   </div>
@@ -80,6 +80,24 @@
       }
     }
     localStorage.setItem("condiments", JSON.stringify(condiments));
+  }
+
+  function saveOrder() {
+    var order = {
+      beverage: localStorage.getItem("beverage"),
+      condiments: JSON.parse(localStorage.getItem("condiments"))
+    };
+    localStorage.setItem("order", JSON.stringify(order));
+    fetch('https://coffee-order-backend-latest.onrender.com/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(order)
+    }).then(response => response.json()).then(data => {
+      localStorage.setItem('receipt', JSON.stringify(data));
+      window.location.href = 'confirmation.html';
+    });
   }
 </script>
 
