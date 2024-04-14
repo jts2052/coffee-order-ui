@@ -9,10 +9,11 @@
 </head>
 
 <body>
-    <nav>
+    <nav id="topnav">
         <ul>
             <li><a href="index.html" class="top-left">Coffee Order System</a></li>
             <li><a href="confirmation.html" class="top-right">Order Status</a></li>
+            <li><a href="login.html" class="top-right">Login</a></li>
         </ul>
     </nav>
     <div class="order-details">
@@ -24,6 +25,7 @@
         </div>
     </div>
 </body>
+<script src="config.js"></script>
 <script>
     var receipt = JSON.parse(localStorage.getItem('receipt'));
     document.getElementById('order-id').innerText += receipt.id;
